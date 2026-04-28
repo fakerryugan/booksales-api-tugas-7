@@ -17,7 +17,7 @@ class TransactionController extends Controller
         } else {
             $transactions = Transaction::with(['user', 'book'])
                 ->where('customer_id', $user->id)
-                ->get();
+                ->get();}
 
         if ($transactions->isEmpty()) {
             return response()->json([
@@ -31,7 +31,7 @@ class TransactionController extends Controller
             'message' => 'Get all resources',
             'data' => $transactions
         ]);
-    }}
+}
 
     public function store(Request $request)
     {
@@ -112,6 +112,74 @@ class TransactionController extends Controller
             'success' => true,
             'message' => 'Get detail resource',
             'data' => $transaction
+        ], 200);
+    }
+    public function update(Request $request, $id)
+    {
+        $transaction = Transaction::find($id);
+
+        if (!$transaction) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Transaction not found!'
+            ], 404);
+        }
+        $user = auth('api')->user();
+        if ($transaction->customer_id !== $user->id) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Unauthorized! Anda tidak bisa mengubah transaksi orang lain.'
+            ], 403);
+        }
+        $validator = Validator::make($request->all(), [
+            'quantity' => 'required|integer|min:1'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Validation error',
+                'data' => $validator->errors()
+            ], 422);
+        }
+        $book = Book::find($transaction->book_id);
+        $book->stock += $transaction->quantity;
+        if ($book->stock < $request->quantity) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Stok barang tidak cukup!'
+            ], 400);
+        }
+
+        $book->stock -= $request->quantity;
+        $book->save();
+
+        $totalAmount = $book->price * $request->quantity;
+
+        $transaction->update([
+            'quantity' => $request->quantity,
+            'total_amount' => $totalAmount
+        ]);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Transaction updated successfully!',
+            'data' => $transaction
+        ], 200);
+    }
+    public function destroy($id)
+    {
+        $transaction = Transaction::find($id);
+        if (!$transaction) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Transaction not found!'
+            ], 404);
+        }
+        $transaction->delete();
+        return response()->json([
+            'success' => true,
+            'message' => 'Transaction deleted successfully!'
         ], 200);
     }
 }
