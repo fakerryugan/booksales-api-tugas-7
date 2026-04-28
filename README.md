@@ -92,10 +92,9 @@ route::middleware('role:admin')->group(function () {
     Route::apiResource('/books', BookController::class)->only('store','update','destroy');
     Route::apiResource('/author', AuthorController::class)->only('store','update','destroy');
     Route::apiResource('/genre', GenreController::class)->only('store','update','destroy');
-    route::apiResource('/transaction', TransactionController::class)->only('index','show','destroy');
+    route::apiResource('/transaction', TransactionController::class)->only('index','destroy');
     });
     route::middleware('role:customer')->group(function () {
     route::apiResource('/transaction', TransactionController::class)->only('store','update','show');
     });});
-
 ```
