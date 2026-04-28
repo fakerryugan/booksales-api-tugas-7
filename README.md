@@ -1,59 +1,101 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+## Tugas 7 - CRUD Transaksi & Relasi Model
+**Nama:** Fatkur Rohman Irham  
+**Kampus:** Politeknik Negeri Banyuwangi  
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Proyek ini merupakan kelanjutan dari sistem API Book Sales. Fokus pada tugas ini adalah mengimplementasikan operasi CRUD pada tabel **Transaksi**, mengatur relasi antar model dan tabel, serta menyesuaikan hak akses menggunakan middleware untuk Admin dan Customer.
 
-## About Laravel
+## Instruksi Tugas
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+1. **CRUD Tabel Transaksi:** Menyelesaikan operasi CRUD untuk tabel Transaksi mengikuti panduan.
+2. **Implementasi Relasi:**
+   - Mengambil data dari relasi Model.
+   - Mengatur relasi di file migration menggunakan `foreignId`.
+3. **Atur Routing & Middleware:**
+   - Endpoint **Create, Update, dan Show** pada Transaksi hanya dapat diakses oleh **Customer** yang sudah melakukan autentikasi.
+   - Endpoint **Read All (Index) dan Destroy** pada Transaksi hanya dapat diakses oleh **Admin**.
+4. **Testing:** Menggunakan Postman untuk melakukan testing aplikasi.
+5. **Pengumpulan:**
+   - Push repository ke GitHub.
+   - Mengumpulkan Link Repository.
+   - Mengumpulkan file `routes/api.php`.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+---
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+# Hasil Pengerjaan Tugas
 
-## Learning Laravel
+## Dokumentasi & Pengujian Endpoint (POSTMAN)
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+### Bagian 1: Hak Akses Customer (Create, Update, Show Transaksi)
+*Pengujian ini dilakukan menggunakan Bearer Token dari user dengan role **Customer**.*
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+**1. Create Transaksi (POST)**
+<img width="1432" height="880" alt="Screenshot 2026-04-28 233944" src="https://github.com/user-attachments/assets/b36ba4a6-fc85-4391-b025-b3c277c7b6e6" />
+**2. Update Transaksi (PUT/PATCH)**
+<img width="1420" height="790" alt="Screenshot 2026-04-28 234230" src="https://github.com/user-attachments/assets/2c2bead2-527f-48ff-8484-0a611397be2a" />
+**3. Show Detail Transaksi (GET Detail)**
+<img width="1431" height="905" alt="Screenshot 2026-04-28 234356" src="https://github.com/user-attachments/assets/bc82deaf-bdc0-4454-ba66-ab99c0288209" />
+**4. Uji Penolakan Akses (Admin / Guest)**
 
-## Laravel Sponsors
+<img width="713" height="329" alt="image" src="https://github.com/user-attachments/assets/574fc5a4-9eaa-4c67-a5b6-46902bd9f345" />
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+---
 
-### Premium Partners
+### Bagian 2: Hak Akses Admin (Read All, Destroy Transaksi)
+*Pengujian ini dilakukan menggunakan Bearer Token dari user dengan role **Admin**.*
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+**1. Read All Transaksi (GET Index)**
+<img width="1430" height="864" alt="Screenshot 2026-04-28 235152" src="https://github.com/user-attachments/assets/969958bd-98e4-4a47-bec4-f336c6490e57" />
 
-## Contributing
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+**2. Destroy Transaksi (DELETE)**
+<img width="1410" height="643" alt="Screenshot 2026-04-28 235225" src="https://github.com/user-attachments/assets/c75b1260-f3c9-452d-9283-c8028ffbf321" />
 
-## Code of Conduct
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+**3. Uji Penolakan Akses (Customer / Guest)**
+<img width="718" height="359" alt="image" src="https://github.com/user-attachments/assets/3c411f7e-ff64-4345-b4cf-58291cf784bb" />
 
-## Security Vulnerabilities
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+---
 
-## License
+### Bagian 3: Implementasi Relasi (Migration & Model)
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+#### A. Relasi di File Migration (`foreignId`)
+
+```php
+ Schema::create('transactions', function (Blueprint $table) {
+            $table->id();
+            $table->string('order_number');
+            $table->foreignId('customer_id')->constrained('users')->onDelete('cascade');
+            $table->foreignId('book_id')->constrained('books')->onDelete('cascade');
+            $table->decimal('total_amount', 10, 2);
+            $table->timestamps();
+        });
+```
+
+#### B. Mengambil Data dari Relasi Model
+
+```php
+ $transaction = Transaction::with(['user', 'book'])->find($id);
+
+        if (!$transaction) {
+            return response()->json(['message' => 'Transaction not found!'], 404);
+        }
+
+```
+
+---
+
+### Bagian 4: Cuplikan Kode Routing (`routes/api.php`)
+
+```php
+route::middleware('role:admin')->group(function () {
+    Route::apiResource('/books', BookController::class)->only('store','update','destroy');
+    Route::apiResource('/author', AuthorController::class)->only('store','update','destroy');
+    Route::apiResource('/genre', GenreController::class)->only('store','update','destroy');
+    route::apiResource('/transaction', TransactionController::class)->only('index','show','destroy');
+    });
+    route::middleware('role:customer')->group(function () {
+    route::apiResource('/transaction', TransactionController::class)->only('store','update','show');
+    });});
+
+```
